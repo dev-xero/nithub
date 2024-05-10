@@ -1,0 +1,7 @@
+class AggregatedKeyboard {
+
+}
+
+class AggregatedLaptop {
+
+}
