@@ -1,7 +1,7 @@
-type CNodeType<T> = CNode<T> | null;
+export type CNodeType<T> = CNode<T> | null;
 
 /** Circular Node */
-class CNode<T> {
+export class CNode<T> {
     public readonly data: T;
     private next: CNodeType<T>;
 
@@ -26,7 +26,7 @@ class CNode<T> {
  * Circular Linked List
  *      a linked list that has its tail pointing back to the head
  * */
-class CLinkedList<T> {
+export class CLinkedList<T> {
     public head: CNodeType<T>;
     public tail: CNodeType<T>;
     private size: number = 0;
@@ -198,6 +198,8 @@ cll.add('nice', 3);
 cll.add('list');
 
 cll.remove(3); // removes 'nice'
+cll.iterate();
+
 cll.iterate();
 
 console.log(cll);
