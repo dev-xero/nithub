@@ -3,8 +3,8 @@ type DNodeType<T> = DoubleNode<T> | null;
 // Double node for doubly linked lists
 class DoubleNode<T> {
     public data: T;
-    public prev: DNodeType<T>;
-    public next: DNodeType<T>;
+    public prev: DNT<T>;
+    public next: DNT<T>;
 
     // Initialize the double node with some data
     constructor(data: T) {
@@ -14,20 +14,20 @@ class DoubleNode<T> {
     }
 
     // Set the previous node
-    public setPrev(node: DNodeType<T>): void {
+    public setPrev(node: DNT<T>): void {
         this.prev = node;
     }
 
     // Set the next node
-    public setNext(node: DNodeType<T>): void {
+    public setNext(node: DNT<T>): void {
         this.next = node;
     }
 }
 
 // Implementation of a doubly linked list
 class DoublyLinkedList<T> {
-    public head: DNodeType<T>;
-    public tail: DNodeType<T>;
+    public head: DNT<T>;
+    public tail: DNT<T>;
 
     // Initialize the doubly linked list with some data
     constructor(dataList: T[] = []) {
@@ -46,8 +46,7 @@ class DoublyLinkedList<T> {
                 currNode.setNext(nextNode);
 
                 // Set the tail if this is the last item
-                if (i + 1 == dataList.length)
-                    this.tail = nextNode
+                if (i + 1 == dataList.length) this.tail = nextNode;
 
                 // Move to the next node
                 currNode = nextNode;
@@ -58,7 +57,7 @@ class DoublyLinkedList<T> {
     // Adds a node to the tail
     public append(item: T) {
         const newTail = new DoubleNode(item);
-        
+
         // Set the new tail's prev to the curr tail, and curr tail's next to new tail
         newTail.setPrev(this.tail);
         this.tail?.setNext(newTail);
