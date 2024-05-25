@@ -68,8 +68,6 @@ class Tree<T> {
         return nodes;
     }
 
-    public output: T[] = [];
-
     // Test pre-order * Error somewhere
     public testPreOrder(node: TreeNode<T> | undefined): T[] {
         if (!node) return [];
@@ -82,10 +80,37 @@ class Tree<T> {
 
         return output;
     }
+
+    // Test in-order ** Error somewhere
+    public testInOrder(node: TreeNode<T> | undefined): T[] {
+        if (!node) return [];
+
+        let output: T[] = [];
+
+        output.push(...this.testPreOrder(node!.left));
+        output.push(node?.data!);
+        output.push(...this.testPreOrder(node!.right));
+
+        return output;
+    }
+
+    // Test post-order -- Works
+    public testPostOrder(node: TreeNode<T> | undefined): T[] {
+        if (!node) return [];
+
+        let output: T[] = [];
+
+        output.push(...this.testPreOrder(node!.left));
+        output.push(...this.testPreOrder(node!.right));
+        output.push(node?.data!);
+
+        return output;
+    }
 }
 
+// Iterates the nodes
 function arrows<T>(nodes: T[]) {
-    let str = '';
+    let str = 'START -> ';
     for (const node of nodes) {
         str += `${node} -> `;
     }
@@ -113,10 +138,39 @@ const nodes = binaryTree.traverse();
 const preorder = binaryTree.preorder(binaryTree.root, []);
 const postorder = binaryTree.postorder(binaryTree.root, []);
 const inorder = binaryTree.inorder(binaryTree.root, []);
+const testPostOrder = binaryTree.testPostOrder(binaryTree.root);
 
-console.log('Traversal', nodes);
-console.log('Pre-order', preorder);
-arrows(preorder);
-console.log('Post-order', postorder);
-console.log('In-order', inorder);
+// console.log('Traversal', nodes);
+// console.log('Pre-order', preorder);
+// arrows(preorder);
+// console.log('Post-order', postorder);
+// console.log('In-order', inorder);
 // console.log('Test pre-order', binaryTree.testPreOrder(binaryTree.root));
+
+// Test tree
+const testTree = new Tree(1);
+
+// Left
+testTree.root!.left = new TreeNode(2);
+testTree.root!.left.left = new TreeNode(4);
+testTree.root!.left.right = new TreeNode(5);
+testTree.root!.left.right.left = new TreeNode(12);
+testTree.root!.left.left.left = new TreeNode(9);
+testTree.root!.left.left.left.left = new TreeNode(11);
+
+// Right
+testTree.root!.right = new TreeNode(3);
+testTree.root!.right.left = new TreeNode(13);
+testTree.root!.right.right = new TreeNode(14);
+testTree.root!.right.right.right = new TreeNode(15);
+
+const testTreeInOrder = testTree.inorder(testTree.root, []);
+const testTreePostOrder = testTree.postorder(testTree.root, []);
+
+console.log('In-order:', testTreeInOrder);
+console.log('Test in-order:', binaryTree.testInOrder(binaryTree.root));
+console.log('Post-order:', testTreePostOrder);
+console.log('Test post-order', testTreePostOrder);
+
+arrows(testTreeInOrder);
+arrows(testTreePostOrder);
