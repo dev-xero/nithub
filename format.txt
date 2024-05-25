@@ -1,0 +1,5 @@
+week_n_classwork_{assignment_name}
+
+ -> both algorithms done
+ -> circular linked list, doubly linked list
+ -> flipping image stuff
