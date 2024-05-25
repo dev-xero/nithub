@@ -19,7 +19,7 @@ class Tree<T> {
     }
 
     // Traverses a tree, returns it's children in order
-    public bfs(): T[] {
+    public traverse(): T[] {
         if (!this.root) return [];
 
         const treeQueue: TreeNode<T>[] = [this.root];
@@ -37,14 +37,35 @@ class Tree<T> {
 
         return leafs;
     }
+
+    // Pre-order traversal
+    public preorder(subtree: TreeNode<T> | undefined, nodes: T[]): T[] {
+        if (subtree) {
+            nodes.push(subtree.data);
+            this.preorder(subtree.left, nodes);
+            this.preorder(subtree.right, nodes);
+        }
+        return nodes;
+    }
 }
 
-const binaryTree = new Tree("root");
+const binaryTree = new Tree(1);
 
-binaryTree.root!.left = new TreeNode("first left");
-binaryTree.root!.right = new TreeNode("first right");
-binaryTree.root!.left.left = new TreeNode("first left's left");
-binaryTree.root!.left.right = new TreeNode("first lefts's right");
+// Left sub-tree
+binaryTree.root!.left = new TreeNode(2);
+binaryTree.root!.left.left = new TreeNode(4);
+binaryTree.root!.left.right = new TreeNode(5);
+binaryTree.root!.left.left.left = new TreeNode(7);
+binaryTree.root!.left.left.right = new TreeNode(11);
 
-const nodes = binaryTree.bfs();
-console.log(nodes);
+// Right sub-tree
+binaryTree.root!.right = new TreeNode(3);
+binaryTree.root!.right.left = new TreeNode(9);
+binaryTree.root!.right.right = new TreeNode(18);
+binaryTree.root!.right.right.left = new TreeNode(19);
+binaryTree.root!.right.right.right = new TreeNode(21);
+
+const nodes = binaryTree.traverse();
+const preorder = binaryTree.preorder(binaryTree.root, []);
+console.log("Traversal", nodes);
+console.log("Pre-order", preorder);
