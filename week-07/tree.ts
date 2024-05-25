@@ -53,11 +53,20 @@ class Tree<T> {
         if (subtree) {
             this.postorder(subtree.left, nodes);
             this.postorder(subtree.right, nodes);
-            nodes.push(subtree.data)
+            nodes.push(subtree.data);
         }
         return nodes;
     }
-    
+
+    // In-order traversal: Left -> Parent -> Right
+    public inorder(subtree: TreeNode<T> | undefined, nodes: T[]): T[] {
+        if (subtree) {
+            this.inorder(subtree.left, nodes);
+            nodes.push(subtree.data);
+            this.inorder(subtree.right, nodes);
+        }
+        return nodes;
+    }
 
     public output: T[] = [];
 
@@ -65,11 +74,13 @@ class Tree<T> {
     public testPreOrder(node: TreeNode<T> | undefined): T[] {
         if (!node) return [];
 
-        this.output.push(node?.data!);
-        this.output.push(...this.testPreOrder(node!.left));
-        this.output.push(...this.testPreOrder(node!.right));
+        let output: T[] = [];
 
-        return this.output;
+        output.push(node?.data!);
+        output.push(...this.testPreOrder(node!.left));
+        output.push(...this.testPreOrder(node!.right));
+
+        return output;
     }
 }
 
@@ -101,9 +112,11 @@ binaryTree.root!.right.right.right = new TreeNode(21);
 const nodes = binaryTree.traverse();
 const preorder = binaryTree.preorder(binaryTree.root, []);
 const postorder = binaryTree.postorder(binaryTree.root, []);
+const inorder = binaryTree.inorder(binaryTree.root, []);
 
 console.log('Traversal', nodes);
 console.log('Pre-order', preorder);
 arrows(preorder);
 console.log('Post-order', postorder);
+console.log('In-order', inorder);
 // console.log('Test pre-order', binaryTree.testPreOrder(binaryTree.root));
