@@ -47,6 +47,15 @@ class Tree<T> {
         }
         return nodes;
     }
+
+    // Test pre-order * Error somewhere
+    public testPreOrder(node: TreeNode<T> | undefined): T[] {
+        const output: T[] = [];
+        output.push(node?.data!);
+        output.push(...this.testPreOrder(node!.left));
+        output.push(...this.testPreOrder(node!.right));
+        return output;
+    }
 }
 
 const binaryTree = new Tree(1);
@@ -67,5 +76,6 @@ binaryTree.root!.right.right.right = new TreeNode(21);
 
 const nodes = binaryTree.traverse();
 const preorder = binaryTree.preorder(binaryTree.root, []);
-console.log("Traversal", nodes);
-console.log("Pre-order", preorder);
+console.log('Traversal', nodes);
+console.log('Pre-order', preorder);
+console.log('Test pre-order', binaryTree.testPreOrder(binaryTree.root));
