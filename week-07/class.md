@@ -6,6 +6,11 @@
    2.  In-Order Traversal
    3.  Post-Order Traversal
 
+## Assignment
+
+1. Implement post order, pre order, in order (David's)
+2. Implement your own in-order, pre-order, post-order
+
 ## Next
 
 1. Binary Search Trees
