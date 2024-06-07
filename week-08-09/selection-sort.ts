@@ -1,8 +1,4 @@
-function swap<T>(arr: T[], i: number, j: number) {
-    const temp = arr[i];
-    arr[i] = arr[j];
-    arr[j] = temp;
-}
+import swap from "./swap.ts";
 
 function selectionSort<T>(space: T[]) {
     for (let i = 0; i < space.length - 1; i++) {
