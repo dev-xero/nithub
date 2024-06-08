@@ -6,12 +6,14 @@ function partition<T>(arr: T[], p: number, r: number): number {
     let i = p - 1;
 
     for (let j = p; j < r; j++) {
+        // If this element is less than the pivot, swap places with i
         if (arr[j] < pivot) {
             i += 1;
             swap(arr, i, j);
         }
     }
 
+    // Swap places with i + 1 and r
     swap(arr, i + 1, r);
     return i + 1;
 }
