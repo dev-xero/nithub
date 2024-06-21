@@ -1,5 +1,6 @@
 import swap from "./swap.ts";
 
+// Selection sort algorithm
 function selectionSort<T>(space: T[]) {
     for (let i = 0; i < space.length - 1; i++) {
         let minIndex = i;  // assume the current element is the min
