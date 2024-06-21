@@ -1,6 +1,6 @@
 ## Bubble Sort Pseudo Code
 
-Pseudo code for an iterative iplementation of bubble sort
+Pseudo code for an iterative implementation of bubble sort.
 
 1. START
 2. Receive an array as the input
@@ -12,4 +12,4 @@ Pseudo code for an iterative iplementation of bubble sort
        1. In each iteration, check if the element at index i is greater than the element at index i+1
        2. If true, swap elements at i and i+1
 8. Set swapped to true
-END
+9. END
