@@ -1,16 +1,37 @@
 const http = require("http");
-const { base } = require("./routes");
+const url = require("url");
+
+const routes = require("./routes");
 
 const host = "localhost";
 const port = 8080;
 
+const notFound = (req, res) => {
+  res.writeHead(404, { "Content-Type": "application/json" });
+  res.end(
+    JSON.stringify({
+      message: "This endpoint does not exist.",
+      code: 404,
+      success: false,
+    }),
+  );
+};
+
 const requestListener = (req, res) => {
-  res.writeHead(200, { "Content-Type": "application/json" });
-  switch (req.url) {
-    case "/":
-      res.end(base);
-      break;
+  const parsedURL = url.parse(req.url, true);
+  const { pathname } = parsedURL;
+
+  // Ignore favicon requests
+  if (pathname == "/favicon.ico") {
+    res.writeHead(204);
+    res.end();
+    return;
   }
+
+  console.log("[*] Request incoming:", pathname);
+
+  const route = routes[pathname] || notFound;
+  route(req, res);
 };
 
 const server = http.createServer(requestListener);
